@@ -1,4 +1,4 @@
-import { AUTH, ERROR } from '../constants/actionTypes';
+import { AUTH, ERROR,LOGOUT } from '../constants/actionTypes';
 
 const authReducer = (state = { authData: null, error: null }, action) => {
     switch (action.type) {
@@ -8,6 +8,9 @@ const authReducer = (state = { authData: null, error: null }, action) => {
         case ERROR:
             localStorage.setItem('error', action?.error );
             return { ...state, error: action?.error }
+        case LOGOUT:
+            localStorage.clear();
+            return { ...state, authData:null }
         default:
             return state;
     }
