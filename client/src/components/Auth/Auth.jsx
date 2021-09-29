@@ -3,6 +3,9 @@ import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import useStyles from './styles';
 import Input from './input';
+import { useDispatch, useSelector } from 'react-redux'
+
+import { signin, signup } from '../../actions/auth'
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
@@ -11,6 +14,8 @@ const Auth = () => {
     const [isSignUp, setIsSignUp] = useState(true);
     const [formData, setFormData] = useState(initialState);
     const [showPassword, setShowPassword] = useState(false);
+    const { authData, error } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,6 +28,21 @@ const Auth = () => {
         handleShowPassword(false);
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (isSignUp) {
+            dispatch(signup(formData));
+        }
+        else {
+            dispatch(signin(formData));
+        }
+    }
+
+    // if (error) {
+    //     alert(error);
+    // }
+    // console.log(error);
+
     return (
         <Container component="main" maxWidth='xs' >
             <Paper className={classes.paper} elevation={3} >
@@ -30,7 +50,7 @@ const Auth = () => {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography variant='h5' >{isSignUp ? 'Sign Up' : 'Sign In'}</Typography>
-                <form className={classes.form} >
+                <form className={classes.form} onSubmit={handleSubmit} >
                     <Grid container spacing={2} >
                         {
                             isSignUp && (

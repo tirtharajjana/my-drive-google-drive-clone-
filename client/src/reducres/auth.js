@@ -1,13 +1,16 @@
-import { AUTH } from '../constants/actionTypes';
+import { AUTH, ERROR } from '../constants/actionTypes';
 
-const authReducre = (state = { authData: null }, action) => {
+const authReducer = (state = { authData: null, error: null }, action) => {
     switch (action.type) {
         case AUTH:
             localStorage.setItem('profile', JSON.stringify({ ...action?.data }));
             return { ...state, authData: action?.data };
+        case ERROR:
+            localStorage.setItem('error', action?.error );
+            return { ...state, error: action?.error }
         default:
             return state;
     }
 }
 
-export default authReducre;
+export default authReducer;
