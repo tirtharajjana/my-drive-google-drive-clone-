@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { AppBar, IconButton, Menu, MenuItem } from '@material-ui/core';
-import AccountCircle from '@material-ui/icons/AccountCircle'
+
 import useStyles from './styles';
 import { Link, useLocation } from 'react-router-dom';
 import myDriveLogo from '../../images/mydriveLogo.jpg';
 import { useDispatch, useSelector } from 'react-redux';
 import SnackBarJs from '../SnackBar/SnackBar';
 import decode from 'jwt-decode';
-
+import { useHistory } from 'react-router';
+import NavBarMenu from './NavBarMenu';
 
 const Navbar = () => {
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    
     const { authData, error } = useSelector((state) => state.auth);
     const location = useLocation();
+    console.log(location.pathname);
     const dispatch = useDispatch();
-
+    const history = useHistory();
 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
@@ -24,18 +26,18 @@ const Navbar = () => {
         if (token) {
             const decodedToken = decode(token);
             // console.log(decodedToken);
-            if (decodedToken * 1000 < new Date().getTime()) console.log();
+            if (decodedToken * 1000 < new Date().getTime()) logout();
         }
-    }, [location, user?.token])
+        setUser(JSON.parse(localStorage.getItem("profile")))
+    }, [location])
 
     const logout = () => {
         dispatch({ type: 'LOGOUT' });
         setUser(null);
+        history.push('/auth');
     }
 
-    const handleChange = (event) => {
-        // setAuth(event.target.checked);
-    };
+    
 
     const Notification = () => {
         if (error) {
@@ -46,31 +48,16 @@ const Navbar = () => {
         }
     }
 
-    const handleMenu = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
     return (
 
         <AppBar position='sticky' color='inherit' className={classes.appBar} >
             <Link to='/' >
                 <img src={myDriveLogo} alt="logo" height="35px" />
             </Link>
-
-            <div>
-                <IconButton size='medium' aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleMenu} color='primary'>
-                    <AccountCircle />
-                </IconButton>
-                <Menu id="menu-appbar" anchorEl={anchorEl} anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right', }} open={Boolean(anchorEl)} onClose={handleClose}>
-                    <MenuItem onClick={() => { }}>Profile</MenuItem>
-                    <MenuItem onClick={logout}>Log out</MenuItem>
-                </Menu>
-                {/* {error && <SnackBarJs error={error} />} */}
-                <Notification />
-            </div>
+            {user &&
+                <NavBarMenu logout={logout} />
+            }
+            <Notification />
         </AppBar>
 
     )

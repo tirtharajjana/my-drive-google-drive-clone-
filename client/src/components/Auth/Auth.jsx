@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import useStyles from './styles';
 import Input from './input';
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router';
 
 import { signin, signup } from '../../actions/auth'
 
@@ -14,7 +15,13 @@ const Auth = () => {
     const [isSignUp, setIsSignUp] = useState(true);
     const [formData, setFormData] = useState(initialState);
     const [showPassword, setShowPassword] = useState(false);
-    const { authData, error } = useSelector((state) => state.auth);
+    const history = useHistory();
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+    useEffect(() => {
+        if (user)
+            history.push('/');
+    }, [history])
+
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
@@ -31,17 +38,13 @@ const Auth = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isSignUp) {
-            dispatch(signup(formData));
+            dispatch(signup(formData, history));
         }
         else {
-            dispatch(signin(formData));
+            dispatch(signin(formData, history));
         }
     }
 
-    // if (error) {
-    //     alert(error);
-    // }
-    // console.log(error);
 
     return (
         <Container component="main" maxWidth='xs' >
