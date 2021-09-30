@@ -1,8 +1,8 @@
-import { AUTH, ERROR,NOERROR } from '../constants/actionTypes';
+import { AUTH, ERROR, NOERROR } from '../constants/actionTypes';
 
 import * as api from '../api/index';
 
-export const signin = (formData,history) => async (dispatch) => {
+export const signin = (formData, history) => async (dispatch) => {
     try {
         dispatch({ type: NOERROR })
 
@@ -17,7 +17,7 @@ export const signin = (formData,history) => async (dispatch) => {
         dispatch({ type: ERROR, error: error.response.data.message })
     }
 }
-export const signup = (formData,history) => async (dispatch) => {
+export const signup = (formData, history) => async (dispatch) => {
     try {
         dispatch({ type: NOERROR })
 

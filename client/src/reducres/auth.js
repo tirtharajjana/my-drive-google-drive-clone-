@@ -6,10 +6,8 @@ const authReducer = (state = { authData: null, error: null }, action) => {
             localStorage.setItem('profile', JSON.stringify({ ...action?.data }));
             return { ...state, authData: action?.data };
         case ERROR:
-            
             return { ...state, error: action?.error }
         case NOERROR:
-           
             return { ...state, error: null }
         case LOGOUT:
             localStorage.clear();
