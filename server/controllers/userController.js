@@ -58,4 +58,25 @@ const getUserDetails = async (req, res) => {
     return res.status(200).json(result);
 }
 
-module.exports = { signin, signup, getUserDetails }
+const uploadLogo = async (req, res) => {
+    try {
+        // console.log(req.file);
+        const logoName = req.file.originalname;
+        const path = req.file.path;
+        const fileType = req.file.mimetype;
+        const id = req.body.id;
+
+
+     await User.findByIdAndUpdate(id, { logoName, path, fileType });
+        const result = await User.findById(id);
+        // console.log(resu);
+        return res.status(200).json(result);
+
+
+    } catch (error) {
+        console.log(error);
+        return res.status(400).send(error.message);
+    }
+}
+
+module.exports = { signin, signup, getUserDetails, uploadLogo }

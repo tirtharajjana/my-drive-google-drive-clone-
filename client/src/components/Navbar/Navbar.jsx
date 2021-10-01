@@ -55,7 +55,7 @@ const Navbar = () => {
                 <img src={myDriveLogo} alt="logo" height="35px" />
             </Link>
             {user &&
-                <NavBarMenu logout={logout} />
+                <NavBarMenu logout={logout}  />
             }
             <Notification />
         </AppBar>

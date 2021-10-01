@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-
-const { signin, signup, getUserDetails } = require('../controllers/userController')
+const { upload } = require('../helpers/filehelper');
+const { signin, signup, getUserDetails, uploadLogo } = require('../controllers/userController')
 
 router.post('/signin', signin);
 router.post('/signup', signup);
 router.get('/:id/detail', getUserDetails);
+router.post('/upload/logo', upload.single('logo'), uploadLogo)
 
 module.exports = router;
