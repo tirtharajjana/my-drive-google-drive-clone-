@@ -7,7 +7,9 @@ const userSchema = mongoose.Schema({
     password: { type: String, require: true },
     logoName: { type: String, require: false },
     path: { type: String, require: false },
-    fileType: { type: String, require: false }
+    fileType: { type: String, require: false },
+    totalStorage: { type: Number, default: 2 * 1024 * 1024 * 1024 },
+    acquiredStorage:{type:Number,default:0}
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

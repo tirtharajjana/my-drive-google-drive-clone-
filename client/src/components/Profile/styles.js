@@ -29,11 +29,11 @@ export default makeStyles((theme) => ({
     },
     cardMedia: {
         // paddingTop: '81.25%',
-        width:'300px',
-        height:'600px',
+        width: '300px',
+        height: '600px',
         borderRadius: '50%',
-        backgroundSize:'cover',
-        backgroundPosition:'center',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         // backgroundRepeat:'no-repeat'
         // margin: '28px'
     },
@@ -43,6 +43,8 @@ export default makeStyles((theme) => ({
         [theme.breakpoints.down('sm')]: {
             flexWrap: 'wrap',
             flexDirection: 'column',
+            alignItems: 'center',
+
         },
     }
 }));
