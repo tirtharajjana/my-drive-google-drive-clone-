@@ -37,6 +37,13 @@ const Navbar = () => {
         history.push('/auth');
     }
 
+    const openHome=()=>{
+        history.push('/');
+    }
+    const openProfile=()=>{
+        history.push('/profile');
+    }
+    
     
 
     const Notification = () => {
@@ -55,7 +62,7 @@ const Navbar = () => {
                 <img src={myDriveLogo} alt="logo" height="35px" />
             </Link>
             {user &&
-                <NavBarMenu logout={logout}  />
+                <NavBarMenu logout={logout} openHome={openHome} openProfile={openProfile} location={location.pathname}  />
             }
             <Notification />
         </AppBar>

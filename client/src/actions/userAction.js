@@ -22,7 +22,7 @@ export const uploadLogo = (formData) => async (dispatch) => {
     try {
         dispatch({ type: NOERROR });
         const  {data}  = await api.uploadLogo(formData);
-        console.log(data);
+        // console.log(data);
         dispatch({ type: USERDETAILS, data })
     } catch (error) {
         console.error(error.response.data.message);

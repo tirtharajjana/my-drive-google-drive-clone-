@@ -55,32 +55,38 @@ const Profile = () => {
     // console.log(userDetails);
     return (
         <Container component="main" maxWidth='md' >
-            {userDetails ? (<div className={classes.paper}>
-                <Card sx={{ display: 'flex' }} elevation={5}>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', padding: '15px' }}  >
-                        {userDetails &&
-                            <Typography variant="h3" gutterBottom component="div">
-                                {userDetails.firstName} {userDetails.lastName}
-                            </Typography>}
+            {userDetails ? (
+                <div className={classes.paper}>
+                    <Card className={classes.card} sx={{ display: 'flex' }} elevation={5}  >
+                        <CardMedia
+                            // className={classes.cardMedia}
+                            component="img"
+                            sx={{ maxWidth: 300, maxHeight: 400, objectFit: 'contain' }}
+                            image={userDetails.path ? `http://localhost:5000/${userDetails.path}` : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"}
+                            alt={userDetails?.logoName}
+                            draggable="false"
+                        // width="200px"
 
-                        {userDetails &&
-                            <Typography variant="h6" gutterBottom component="div">
-                                {userDetails.email}
-                            </Typography>}
-                        <Button variant="contained" component="label" >
-                            {userDetails.path ? 'Change': "Upload"} profile picture
-                            <input type="file" accept="image/*" hidden onChange={(e) => SingleFileChange(e)} />
-                        </Button>
-                    </Box>
-                    <CardMedia
-                        component="img"
-                        sx={{ width: 400 }}
-                        image={userDetails.path ? `http://localhost:5000/${userDetails.path}` : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"}
-                        alt="Live from space album cover"
-                        draggable="false"
-                    />
-                </Card>
-            </div>) : <CircularProgress />}
+                        />
+                        <Box sx={{ display: 'flex', flexDirection: 'column', padding: '15px' }}  >
+                            {userDetails &&
+                                <Typography variant="h3" gutterBottom component="div">
+                                    {userDetails.firstName} {userDetails.lastName}
+                                </Typography>}
+
+                            {userDetails &&
+                                <Typography variant="h6" gutterBottom component="div">
+                                    {userDetails.email}
+                                </Typography>}
+                            <Button variant="contained" component="label" >
+                                {userDetails.path ? 'Change' : "Upload"} profile picture
+                                <input type="file" accept="image/*" hidden onChange={(e) => SingleFileChange(e)} />
+                            </Button>
+                        </Box>
+
+                    </Card>
+                </div>
+            ) : <CircularProgress />}
         </Container>
     )
 }

@@ -27,4 +27,22 @@ export default makeStyles((theme) => ({
     googleButton: {
         marginBottom: theme.spacing(2),
     },
+    cardMedia: {
+        // paddingTop: '81.25%',
+        width:'300px',
+        height:'600px',
+        borderRadius: '50%',
+        backgroundSize:'cover',
+        backgroundPosition:'center',
+        // backgroundRepeat:'no-repeat'
+        // margin: '28px'
+    },
+    card: {
+        display: 'flex',
+        // width: '100%',
+        [theme.breakpoints.down('sm')]: {
+            flexWrap: 'wrap',
+            flexDirection: 'column',
+        },
+    }
 }));

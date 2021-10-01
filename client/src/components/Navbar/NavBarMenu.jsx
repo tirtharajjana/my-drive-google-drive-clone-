@@ -1,7 +1,8 @@
 import React from 'react'
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { AppBar, IconButton, Menu, MenuItem } from '@material-ui/core';
-const NavBarMenu = ({logout}) => {
+
+const NavBarMenu = ({ logout, openHome, openProfile, location }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleMenu = (event) => {
@@ -16,14 +17,15 @@ const NavBarMenu = ({logout}) => {
     // };
     return (
         <div>
-                    <IconButton size='medium' aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleMenu} color='primary'>
-                        <AccountCircle />
-                    </IconButton>
-                    <Menu id="menu-appbar" anchorEl={anchorEl} anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right', }} open={Boolean(anchorEl)} onClose={handleClose}>
-                        <MenuItem onClick={() => { }}>Profile</MenuItem>
-                        <MenuItem onClick={logout}>Log out</MenuItem>
-                    </Menu>
-                </div>
+            <IconButton size='medium' aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleMenu} color='primary'>
+                <AccountCircle />
+            </IconButton>
+            <Menu id="menu-appbar" anchorEl={anchorEl} anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right', }} open={Boolean(anchorEl)} onClose={handleClose}>
+                { location === '/' && <MenuItem onClick={openProfile}>Profile</MenuItem>}
+                { location === '/profile' && <MenuItem onClick={openHome}>Home</MenuItem>}
+                <MenuItem onClick={logout}>Log out</MenuItem>
+            </Menu>
+        </div>
     )
 }
 
