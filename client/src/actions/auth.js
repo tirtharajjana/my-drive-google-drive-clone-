@@ -1,4 +1,4 @@
-import { AUTH, ERROR, NOERROR } from '../constants/actionTypes';
+import { AUTH, ERROR, NOERROR,LOGOUT } from '../constants/actionTypes';
 
 import * as api from '../api/index';
 
@@ -7,6 +7,7 @@ export const signin = (formData, history) => async (dispatch) => {
         dispatch({ type: NOERROR })
 
         const { data } = await api.signIn(formData);
+        dispatch({ type: 'USERDETAILS', data:data.result });
 
         dispatch({ type: AUTH, data });
         history.push('/');
@@ -23,7 +24,7 @@ export const signup = (formData, history) => async (dispatch) => {
 
         const { data } = await api.signUp(formData);
         // console.log(data);
-
+        dispatch({ type: 'USERDETAILS', data:data.result });
         dispatch({ type: AUTH, data });
         history.push('/');
 
@@ -33,3 +34,4 @@ export const signup = (formData, history) => async (dispatch) => {
         dispatch({ type: ERROR, error: error.response.data.message })
     }
 }
+

@@ -12,7 +12,7 @@ import NavBarMenu from './NavBarMenu';
 
 const Navbar = () => {
     const classes = useStyles();
-    
+
     const { authData, error } = useSelector((state) => state.auth);
     const location = useLocation();
     console.log(location.pathname);
@@ -33,18 +33,19 @@ const Navbar = () => {
 
     const logout = () => {
         dispatch({ type: 'LOGOUT' });
+        dispatch({ type: 'USERDETAILS', data: null });
         setUser(null);
         history.push('/auth');
     }
 
-    const openHome=()=>{
+    const openHome = () => {
         history.push('/');
     }
-    const openProfile=()=>{
+    const openProfile = () => {
         history.push('/profile');
     }
-    
-    
+
+
 
     const Notification = () => {
         if (error) {
@@ -62,7 +63,7 @@ const Navbar = () => {
                 <img src={myDriveLogo} alt="logo" height="35px" />
             </Link>
             {user &&
-                <NavBarMenu logout={logout} openHome={openHome} openProfile={openProfile} location={location.pathname}  />
+                <NavBarMenu logout={logout} openHome={openHome} openProfile={openProfile} location={location.pathname} />
             }
             <Notification />
         </AppBar>
