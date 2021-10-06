@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
 const User = require('../models/user');
+const Folder = require('../models/folder');
 
 const signin = async (req, res) => {
     const { email, password } = req.body;
@@ -16,6 +17,8 @@ const signin = async (req, res) => {
         if (!checkPassword) {
             return res.status(400).json({ message: 'Invalid password.' })
         }
+
+
 
         const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, 'test', { expiresIn: '30d' });
 
@@ -36,7 +39,15 @@ const signup = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        const result = await User.create({ email, password: hashedPassword, firstName, lastName });
+        var result = await User.create({ email, password: hashedPassword, firstName, lastName });;
+
+        const folder = await Folder.create({ name: "Root", userId: result._id });
+
+        await User.findByIdAndUpdate(result._id, { rootFolder: folder._id })
+
+        result=await User.findById(result._id);
+
+        console.log(result);
 
         const token = jwt.sign({ email: result.email, id: result._id }, 'test', { expiresIn: '30d' });
 
@@ -67,7 +78,7 @@ const uploadLogo = async (req, res) => {
         const id = req.body.id;
 
 
-     await User.findByIdAndUpdate(id, { logoName, path, fileType });
+        await User.findByIdAndUpdate(id, { logoName, path, fileType });
         const result = await User.findById(id);
         // console.log(resu);
         return res.status(200).json(result);
