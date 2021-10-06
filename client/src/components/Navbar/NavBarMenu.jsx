@@ -1,18 +1,27 @@
-import React,{useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { AppBar, IconButton, Menu, MenuItem,Avatar } from '@material-ui/core';
+import { AppBar, IconButton, Menu, MenuItem, Avatar } from '@material-ui/core';
+import { getUserDetails } from '../../actions/userAction';
 
 
 const NavBarMenu = ({ logout, openHome, openProfile, location }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+
+    const dispatch = useDispatch();
+    if (user) {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useEffect(() => {
+            dispatch(getUserDetails(user.result._id))
+        }, [dispatch, user.result._id]);
+    }
     const { userDetails } = useSelector(state => state.userDetails);
-    
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
     };
-    console.log(userDetails);
+    // console.log(userDetails);
     const handleClose = () => {
         setAnchorEl(null);
     };
