@@ -31,9 +31,11 @@ export const uploadLogo = (formData) => async (dispatch) => {
     }
 }
 
-export const createFolder = (formData) => async (dispatch) => {
+export const createFolder = ({ name, parentId, userId }) => async (dispatch) => {
     try {
+        // console.log(formData);
         dispatch({ type: NOERROR });
+        await api.createFolder({ name, parentId, userId });
 
     } catch (error) {
         console.error(error.response.data.message);
