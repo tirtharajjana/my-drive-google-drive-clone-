@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { getUserDetails } from '../../actions/userAction';
 import Dashboard from './subcomponents/dashboard/Dashboard';
-import Folder from './subcomponents/folder/Folder';
+import Folders from './subcomponents/folder/Folders';
 
 const Home = () => {
     const history = useHistory();
@@ -29,7 +29,7 @@ const Home = () => {
                 (
                     <>
                         <Dashboard />
-                        <Folder />
+                        <Folders />
                     </>
                 )
                 : <CircularProgress />}

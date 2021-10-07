@@ -8,9 +8,4 @@ export const signUp = (formData) => API.post('/user/signup', formData);
 export const getUserDetails = (id) => API.get(`/user/${id}/detail`);
 export const uploadLogo = (formData) => API.post('/user/upload/logo', formData);
 export const createFolder = ({name,parentId,userId}) => API.post('/api/create/folder', {name,parentId,userId});
-// export const signUp = (formData) => {
-//     API.post('/user/signup', formData).catch(error => {
-//         console.log(error.response.data.message);
-//         return error.response.data.message;
-//     })
-// };
+export const getFolders = (parentId) => API.get(`/api/folder/detail/${parentId}`);

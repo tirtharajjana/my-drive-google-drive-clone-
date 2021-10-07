@@ -86,9 +86,9 @@ const Profile = () => {
 
                             {/* <ChangePassword /> */}
                             <Typography align="center" variant="h6" >Avalible Storage</Typography>
-                            <Box sx={{ margin: 'auto',width:'100px', height:'200px' }}   >
-                                
-                                <CircularProgressbar value={percentage} text={`${percentage}%`}  />
+                            <Box sx={{ margin: 'auto', width: '100px', height: '200px' }}   >
+
+                                <CircularProgressbar value={percentage} text={`${percentage}%`} />
                             </Box>
 
 

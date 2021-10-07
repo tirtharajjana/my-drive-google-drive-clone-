@@ -17,4 +17,18 @@ const createFolder = async (req, res) => {
     }
 }
 
-module.exports = { createFolder }
+const getFolders = async (req, res) => {
+    const { parentId } = req.params;
+
+    // console.log(parentId);
+    try {
+        const result = await Folder.find({ parentId }).collation({locale: "en" }).sort({ name: 1 });
+        // console.log(result);
+        return res.status(200).json({ result });
+
+    } catch (error) {
+        return res.status(500).json({ message: "Something went wrong." });
+    }
+}
+
+module.exports = { createFolder, getFolders }

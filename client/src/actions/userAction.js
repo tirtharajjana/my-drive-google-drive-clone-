@@ -1,5 +1,5 @@
 import * as api from '../api/index';
-import { ERROR, NOERROR, USERDETAILS } from '../constants/actionTypes';
+import { ERROR, NOERROR, USERDETAILS, FOLDERDETAILS } from '../constants/actionTypes';
 
 export const getUserDetails = (id) => async (dispatch) => {
     try {
@@ -36,8 +36,25 @@ export const createFolder = ({ name, parentId, userId }) => async (dispatch) => 
         // console.log(formData);
         dispatch({ type: NOERROR });
         await api.createFolder({ name, parentId, userId });
-
+        const { data } = await api.getFolders(parentId);
+        // console.log(data);
+        dispatch({ type: FOLDERDETAILS, data });
     } catch (error) {
+        console.error(error.response.data.message);
+        dispatch({ type: NOERROR })
+        dispatch({ type: ERROR, error: error.response.data.message })
+    }
+}
+
+export const getFolders = ( parentId ) => async (dispatch) => {
+    try {
+        dispatch({ type: NOERROR });
+        // console.log(parentId);
+        const { data } = await api.getFolders(parentId);
+        // console.log(data);
+        dispatch({ type: FOLDERDETAILS, data });
+    } catch (error) {
+        // console.error(error.response);
         console.error(error.response.data.message);
         dispatch({ type: NOERROR })
         dispatch({ type: ERROR, error: error.response.data.message })

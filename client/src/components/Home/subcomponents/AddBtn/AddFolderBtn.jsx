@@ -8,8 +8,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import TextField from '@mui/material/TextField';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { createFolder } from '../../../../actions/userAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { createFolder, getFolders } from '../../../../actions/userAction';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction='down' ref={ref} {...props} />;
@@ -23,6 +23,9 @@ const AddFolderBtn = () => {
     const { id } = useParams();
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
     const dispatch = useDispatch();
+    const parentId = id;
+
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -32,15 +35,13 @@ const AddFolderBtn = () => {
         setOpen(false);
     };
 
+    useEffect(() => {
+        dispatch(getFolders(parentId));
+    }, [dispatch, id, parentId])
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const userId = user.result._id;
-        const parentId = id;
-        // const formData = new FormData();
-        // formData.append('name', name);
-        // formData.append('parentId', id);
-        // formData.append('userId', user.result._id);
-        // console.log(formData);
         dispatch(createFolder({ name, parentId, userId }));
         handleClose();
     }
