@@ -4,7 +4,6 @@ import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import TextField from '@mui/material/TextField';
@@ -40,7 +39,7 @@ const AddFolderBtn = () => {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>
-                        <Button type="submit" >Add</Button>
+                        <Button type="submit">Add</Button>
                     </DialogActions>
                 </form>
             </Dialog>

@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const path =require('path');
 
 const userRoutes = require('./routes/users.js')
+const userAction = require('./routes/userAction.js')
 
 const PORT = process.env.PORT || 5000;
 
@@ -17,6 +18,7 @@ require('./config/db')();
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/user', userRoutes);
+app.use('/api', userAction);
 app.get('/', (req, res) => {
     res.send('Welcome to our API');
 })

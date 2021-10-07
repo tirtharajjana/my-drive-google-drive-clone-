@@ -45,7 +45,7 @@ const signup = async (req, res) => {
 
         await User.findByIdAndUpdate(result._id, { rootFolder: folder._id })
 
-        result=await User.findById(result._id);
+        result = await User.findById(result._id);
 
         console.log(result);
 

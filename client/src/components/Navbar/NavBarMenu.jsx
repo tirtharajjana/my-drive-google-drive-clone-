@@ -27,15 +27,15 @@ const NavBarMenu = ({ logout, openHome, openProfile, location }) => {
     };
     useEffect(() => {
         handleClose();
-    }, [location])
+    }, [location]);
     return (
         <div>
             <IconButton size='medium' aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleMenu} color='primary'>
                 {userDetails?.path ? <Avatar src={`http://localhost:5000/${userDetails.path}`} alt="logo" /> : <AccountCircle />}
             </IconButton>
             <Menu id="menu-appbar" anchorEl={anchorEl} anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right', }} open={Boolean(anchorEl)} onClose={handleClose}>
-                {location === '/' && <MenuItem onClick={openProfile}>Profile</MenuItem>}
-                {location === '/profile' && <MenuItem onClick={openHome}>Home</MenuItem>}
+
+                {location === '/profile' ? <MenuItem onClick={openHome}>Home</MenuItem> : <MenuItem onClick={openProfile}>Profile</MenuItem>}
                 <MenuItem onClick={logout}>Log out</MenuItem>
             </Menu>
         </div>

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { getUserDetails } from '../../actions/userAction';
 import Dashboard from './subcomponents/dashboard/Dashboard';
+import Folder from './subcomponents/folder/Folder';
 
 const Home = () => {
     const history = useHistory();
@@ -25,7 +26,12 @@ const Home = () => {
     return (
         <>
             {userDetails ?
-                <Dashboard />
+                (
+                    <>
+                        <Dashboard />
+                        <Folder />
+                    </>
+                )
                 : <CircularProgress />}
 
         </>

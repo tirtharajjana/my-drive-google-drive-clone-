@@ -10,7 +10,7 @@ export const signin = (formData, history) => async (dispatch) => {
         dispatch({ type: 'USERDETAILS', data:data.result });
 
         dispatch({ type: AUTH, data });
-        history.push('/');
+        history.push(`/folder/${data.result?.rootFolder}`);
 
     } catch (error) {
         console.error(error.response.data.message);
@@ -26,7 +26,7 @@ export const signup = (formData, history) => async (dispatch) => {
         // console.log(data);
         dispatch({ type: 'USERDETAILS', data:data.result });
         dispatch({ type: AUTH, data });
-        history.push('/');
+        history.push(`/folder/${data.result?.rootFolder}`);
 
     } catch (error) {
         console.error(error.response.data.message);
