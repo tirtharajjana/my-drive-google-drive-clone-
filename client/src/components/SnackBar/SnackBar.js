@@ -35,14 +35,14 @@ const SnackBarJs = ({ error, type = 'success' }) => {
 
     return (
 
-        <Stack>
+        // <Stack>
             <Snackbar open={open} anchorOrigin={{ vertical: 'bottom', horizontal: 'right', }} TransitionComponent={TransitionUp} autoHideDuration={3000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity={type} sx={{ width: '100%' }}>
                     {error}
                 </Alert>
             </Snackbar>
 
-        </Stack >
+        // {/* </Stack > */}
     )
 }
 

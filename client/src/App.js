@@ -23,7 +23,7 @@ function App() {
           <Route path="/folder/:id" exact component={Home} />
           <Route path="/auth" exact component={Auth} />
           <Route path="/profile" exact component={Profile} />
-          <Route  component={NotFound} />
+          <Route component={NotFound} />
           {/* () => ((!user) ? <Auth /> : <Redirect to="/" />) */}
         </Switch>
       </Container>

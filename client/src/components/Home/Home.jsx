@@ -1,14 +1,17 @@
 import { CircularProgress } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { getUserDetails } from '../../actions/userAction';
 import Dashboard from './subcomponents/dashboard/Dashboard';
 import Folders from './subcomponents/folder/Folders';
+import { getFolders } from '../../actions/userAction';
 
 const Home = () => {
     const history = useHistory();
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+    const { id } = useParams();
+    const parentId = id;
     useEffect(() => {
         if (!user)
             history.push('/auth');
@@ -20,8 +23,17 @@ const Home = () => {
             dispatch(getUserDetails(user.result._id))
         }, [dispatch, user.result._id]);
     }
-    const { userDetails } = useSelector(state => state.userDetails);
 
+
+    useEffect(() => {
+        dispatch(getFolders(parentId,history));
+    }, [dispatch, history, parentId])
+
+
+    const { userDetails } = useSelector(state => state.userDetails);
+    const { folderDetails } = useSelector(state => state.folderDetails);
+
+    console.log(folderDetails);
 
     return (
         <>

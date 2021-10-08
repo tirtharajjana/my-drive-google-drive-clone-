@@ -46,7 +46,7 @@ export const createFolder = ({ name, parentId, userId }) => async (dispatch) => 
     }
 }
 
-export const getFolders = ( parentId ) => async (dispatch) => {
+export const getFolders = (parentId, history) => async (dispatch) => {
     try {
         dispatch({ type: NOERROR });
         // console.log(parentId);
@@ -54,6 +54,7 @@ export const getFolders = ( parentId ) => async (dispatch) => {
         // console.log(data);
         dispatch({ type: FOLDERDETAILS, data });
     } catch (error) {
+        history.push('/');
         // console.error(error.response);
         console.error(error.response.data.message);
         dispatch({ type: NOERROR })

@@ -35,9 +35,6 @@ const AddFolderBtn = () => {
         setOpen(false);
     };
 
-    useEffect(() => {
-        dispatch(getFolders(parentId));
-    }, [dispatch, id, parentId])
 
     const handleSubmit = (e) => {
         e.preventDefault();

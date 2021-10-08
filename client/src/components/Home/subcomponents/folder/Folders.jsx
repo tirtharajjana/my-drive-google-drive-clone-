@@ -6,7 +6,7 @@ import Folder from './Folder';
 const Folders = () => {
     const { folderDetails } = useSelector(state => state.folderDetails);
     // console.log(folderDetails.length);
-
+    
     // if (!folderDetails.length ) return 'No Folder found';
     return (
         <>
