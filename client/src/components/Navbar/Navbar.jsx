@@ -15,7 +15,7 @@ const Navbar = () => {
 
     const { authData, error } = useSelector((state) => state.auth);
     const location = useLocation();
-    console.log(location.pathname);
+    // console.log(location.pathname);
     const dispatch = useDispatch();
     const history = useHistory();
 

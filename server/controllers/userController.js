@@ -47,7 +47,7 @@ const signup = async (req, res) => {
 
         result = await User.findById(result._id);
 
-        console.log(result);
+        // console.log(result);
 
         const token = jwt.sign({ email: result.email, id: result._id }, 'test', { expiresIn: '30d' });
 

@@ -10,14 +10,13 @@ const Folder = ({ folder }) => {
     const handleClick = () => {
         history.push(`/folder/${folder._id}`)
     }
-    
+
     return (
         // <Button component={Link} href={`http://localhost:3000/folder/${folder._id}`} variant='outlined' >
         //     <FolderIcon /> {folder.name}
         // </Button>
-        <Button onClick={handleClick} variant='outlined' >
+        <Button onClick={handleClick} variant='outlined' style={{ textTransform: 'none' }} >
             <FolderIcon /> {folder.name}
-            
         </Button>
 
 

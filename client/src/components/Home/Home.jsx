@@ -26,14 +26,14 @@ const Home = () => {
 
 
     useEffect(() => {
-        dispatch(getFolders(parentId,history));
+        dispatch(getFolders(parentId, history));
     }, [dispatch, history, parentId])
 
 
     const { userDetails } = useSelector(state => state.userDetails);
     const { folderDetails } = useSelector(state => state.folderDetails);
 
-    console.log(folderDetails);
+    // console.log(folderDetails);
 
     return (
         <>
