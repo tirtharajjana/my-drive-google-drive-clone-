@@ -2,14 +2,14 @@ const Folder = require('../models/folder');
 
 
 const createFolder = async (req, res) => {
-    const { name, parentId, userId } = req.body;
-
+    const { name, parentId, userId, path } = req.body;
+    // console.log(path);
     try {
         // console.log(`get a create req of ${name}`);
         const existingFolder = await Folder.findOne({ name, parentId });
         // console.log(existingFolder);
-        if (existingFolder) return res.status(400).json({ message: "Folder already with this name." });
-        const folder = await Folder.create({ name, parentId, userId });
+        if (existingFolder) return res.status(400).json({ message: "Folder already exist with this name." });
+        const folder = await Folder.create({ name, parentId, userId, path });
         // console.log(folder);
         return res.status(200).json({ message: "Folder Created" });
     } catch (error) {

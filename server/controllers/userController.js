@@ -61,11 +61,11 @@ const signup = async (req, res) => {
 
 const getUserDetails = async (req, res) => {
     const { id } = req.params;
-    // console.log(id);
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).json({ message: "No user exist with this id" });
 
     const result = await User.findById(id);
-
+    // log
+    // console.log(result);
     return res.status(200).json(result);
 }
 

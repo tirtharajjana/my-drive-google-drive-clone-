@@ -16,7 +16,7 @@ const Folder = ({ folder }) => {
         //     <FolderIcon /> {folder.name}
         // </Button>
         <Button onClick={handleClick} variant='outlined' style={{ textTransform: 'none' }} >
-            <FolderIcon /> {folder.name}
+            <FolderIcon />&nbsp; {folder.name}
         </Button>
 
 

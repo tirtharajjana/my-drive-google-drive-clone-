@@ -13,8 +13,8 @@ export const getUserDetails = (id) => async (dispatch) => {
 
     } catch (error) {
         console.error(error.response.data.message);
-        dispatch({ type: NOERROR })
-        dispatch({ type: ERROR, error: error.response.data.message })
+        dispatch({ type: NOERROR });
+        dispatch({ type: ERROR, error: error.response.data.message });
     }
 }
 
@@ -31,11 +31,11 @@ export const uploadLogo = (formData) => async (dispatch) => {
     }
 }
 
-export const createFolder = ({ name, parentId, userId }) => async (dispatch) => {
+export const createFolder = ({ name, parentId, userId, path }) => async (dispatch) => {
     try {
         // console.log(formData);
         dispatch({ type: NOERROR });
-        await api.createFolder({ name, parentId, userId });
+        await api.createFolder({ name, parentId, userId, path });
         const { data } = await api.getFolders(parentId);
         // console.log(data);
         dispatch({ type: FOLDERDETAILS, data });

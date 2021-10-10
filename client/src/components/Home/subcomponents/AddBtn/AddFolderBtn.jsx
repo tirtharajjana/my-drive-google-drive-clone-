@@ -24,6 +24,7 @@ const AddFolderBtn = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
     const dispatch = useDispatch();
     const parentId = id;
+    const { folderDetails, currentFolder } = useSelector(state => state.folderDetails);
 
 
 
@@ -35,11 +36,25 @@ const AddFolderBtn = () => {
         setOpen(false);
     };
 
+    // if (currentFolder?.path) {
+    // const path = [...currentFolder?.path];
+    // }
+    const path = [];
 
+    if (currentFolder?.path) {
+        currentFolder?.path.map((mp) => { path.push(mp) })
+    }
+
+    // const path = [...currentFolder?.path, { name: currentFolder?.name, id: currentFolder?._id }]
+    // path.push([currentFolder?.path])
+    path.push({ name: currentFolder?.name, id: currentFolder?._id })
+    // console.log(path);
     const handleSubmit = (e) => {
         e.preventDefault();
         const userId = user.result._id;
-        dispatch(createFolder({ name, parentId, userId }));
+        // console.log(path);
+        dispatch(createFolder({ name, parentId, userId, path }));
+        setName('');
         handleClose();
     }
 

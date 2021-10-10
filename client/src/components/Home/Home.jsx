@@ -33,10 +33,8 @@ const Home = () => {
 
 
     const { userDetails } = useSelector(state => state.userDetails);
-    const { folderDetails, currentFolder } = useSelector(state => state.folderDetails);
-    // const { currentFolder } = useSelector(state => state.currentFolder);
 
-    // console.log(currentFolder);
+
 
     return (
         <>
