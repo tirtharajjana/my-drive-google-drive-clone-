@@ -1,5 +1,5 @@
 import * as api from '../api/index';
-import { ERROR, NOERROR, USERDETAILS, FOLDERDETAILS } from '../constants/actionTypes';
+import { ERROR, NOERROR, USERDETAILS, FOLDERDETAILS, CURRENTFOLDERDETAILS } from '../constants/actionTypes';
 
 export const getUserDetails = (id) => async (dispatch) => {
     try {
@@ -50,9 +50,29 @@ export const getFolders = (parentId, history) => async (dispatch) => {
     try {
         dispatch({ type: NOERROR });
         // console.log(parentId);
-        const { data } = await api.getFolders(parentId);
+        var { data } = await api.getFolders(parentId);
         // console.log(data);
         dispatch({ type: FOLDERDETAILS, data });
+        var { data } = await api.getCurrentFolder(parentId);
+        // console.log(data);
+        dispatch({ type: CURRENTFOLDERDETAILS, data });
+
+    } catch (error) {
+        history.push('/');
+        // console.error(error.response);
+        console.error(error.response.data.message);
+        dispatch({ type: NOERROR })
+        dispatch({ type: ERROR, error: error.response.data.message })
+    }
+}
+
+export const getCurrentFolder = (currentFolderId, history) => async (dispatch) => {
+    try {
+        dispatch({ type: NOERROR });
+        console.log(currentFolderId);
+        // const { data } = await api.getCurrentFolder(currentFolderId);
+        // console.log(data);
+        // dispatch({ type: CURRENTFOLDERDETAILS, data });
     } catch (error) {
         history.push('/');
         // console.error(error.response);

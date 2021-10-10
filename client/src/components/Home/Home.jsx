@@ -5,17 +5,18 @@ import { useHistory, useParams } from 'react-router';
 import { getUserDetails } from '../../actions/userAction';
 import Dashboard from './subcomponents/dashboard/Dashboard';
 import Folders from './subcomponents/folder/Folders';
-import { getFolders } from '../../actions/userAction';
+import { getFolders, getCurrentFolder } from '../../actions/userAction';
 
 const Home = () => {
     const history = useHistory();
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-    const { id } = useParams();
-    const parentId = id;
     useEffect(() => {
         if (!user)
             history.push('/auth');
     }, [history])
+    const { id } = useParams();
+    const parentId = id;
+
     const dispatch = useDispatch();
     if (user) {
         // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -27,13 +28,15 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(getFolders(parentId, history));
+        // dispatch(getCurrentFolder(parentId, history));
     }, [dispatch, history, parentId])
 
 
     const { userDetails } = useSelector(state => state.userDetails);
-    const { folderDetails } = useSelector(state => state.folderDetails);
+    const { folderDetails, currentFolder } = useSelector(state => state.folderDetails);
+    // const { currentFolder } = useSelector(state => state.currentFolder);
 
-    // console.log(folderDetails);
+    // console.log(currentFolder);
 
     return (
         <>

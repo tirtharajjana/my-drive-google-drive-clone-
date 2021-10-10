@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/create/folder', createFolder);
 router.get('/folder/detail/:parentId', checkFolder, getFolders);
-router.get('/currentFolder/detail/:currentFolderId', checkFolder, getCurrentFolder);
+router.get('/currentFolder/detail/:currentFolderId', getCurrentFolder);
 
 
 

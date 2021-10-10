@@ -13,7 +13,7 @@ const Folders = () => {
 
     return (
         <>
-            <button onClick={() => { history.goBack() }} >Back</button>
+
             <Grid container alignItems='center' spacing={2} >
                 {folderDetails &&
                     folderDetails.map((folder) => (

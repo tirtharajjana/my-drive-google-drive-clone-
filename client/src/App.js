@@ -19,7 +19,7 @@ function App() {
       <Navbar />
       <Container maxWidth="xl" >
         <Switch>
-          <Route path="/" exact component={() => <Redirect to={`/folder/${user.result.rootFolder}`} />} />
+          <Route path="/" exact component={() => <Redirect to={`/folder/${user?.result?.rootFolder}`} />} />
           <Route path="/folder/:id" exact component={Home} />
           <Route path="/auth" exact component={Auth} />
           <Route path="/profile" exact component={Profile} />
