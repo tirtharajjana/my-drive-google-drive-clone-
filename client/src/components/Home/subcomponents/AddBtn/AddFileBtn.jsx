@@ -3,7 +3,7 @@ import { Button } from '@mui/material'
 import UploadFileRoundedIcon from '@mui/icons-material/UploadFileRounded';
 import { useDispatch, useSelector } from 'react-redux';
 import { ERROR, NOERROR, SUCCESS, NOSUCCESS } from '../../../../constants/actionTypes'
-import { createFile } from '../../../../actions/userAction';
+import { createFile, getFiles } from '../../../../actions/userAction';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -15,6 +15,7 @@ import PropTypes from 'prop-types';
 import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { useParams } from 'react-router';
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -24,6 +25,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const AddFileBtn = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
     const [open, setOpen] = React.useState(false);
+    const { id } = useParams();
+    const parentId = id;
 
     const [progress, setProgress] = useState(0)
     const { folderDetails, currentFolder } = useSelector(state => state.folderDetails);
@@ -42,10 +45,14 @@ const AddFileBtn = () => {
     }
 
     useEffect(() => {
-        if (progress === Number(100))
+        if (progress === Number(100)) {
             setOpen(false);
+        }
     }, [progress])
 
+    // useEffect(() => {
+    //     dispatch(getFiles(parentId));
+    // }, [dispatch])
 
 
     const SingleFileChange = (e) => {
@@ -57,19 +64,20 @@ const AddFileBtn = () => {
             dispatch({ type: ERROR, error: 'Please select one file' })
             return;
         }
-        // if (e.target.files[0].size > 1024 * 1024 * 100) {
-        //     dispatch({ type: NOERROR });
-        //     dispatch({ type: ERROR, error: 'file size must be less than 100mb' })
-        //     return;
-        // }
+        if (e.target.files[0].size > 1024 * 1024 * 750) {
+            dispatch({ type: NOERROR });
+            dispatch({ type: ERROR, error: 'file size must be less than 750mb' })
+            return;
+        }
         dispatch({ type: NOSUCCESS });
         dispatch({ type: SUCCESS, success: 'you are good to go' })
         var formData = new FormData();
         formData.append('file', e.target.files[0]);
         formData.append('userId', user.result._id);
         formData.append('parentId', currentFolder._id);
-        dispatch(createFile(formData, FileOptions))
+        dispatch(createFile(formData, parentId, FileOptions))
         setOpen(true);
+
     }
     return (
         <>

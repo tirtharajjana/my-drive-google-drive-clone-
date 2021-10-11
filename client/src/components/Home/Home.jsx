@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router';
 import { getUserDetails } from '../../actions/userAction';
 import Dashboard from './subcomponents/dashboard/Dashboard';
 import Folders from './subcomponents/folder/Folders';
-import { getFolders, getCurrentFolder } from '../../actions/userAction';
+import { getFolders, getCurrentFolder, getFiles } from '../../actions/userAction';
 
 const Home = () => {
     const history = useHistory();
@@ -28,13 +28,15 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(getFolders(parentId, history));
+        dispatch(getFiles(parentId));
         // dispatch(getCurrentFolder(parentId, history));
     }, [dispatch, history, parentId])
 
 
     const { userDetails } = useSelector(state => state.userDetails);
+    const { fileDetails } = useSelector(state => state.folderDetails);
 
-
+    console.log(fileDetails);
 
     return (
         <>

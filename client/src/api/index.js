@@ -18,4 +18,5 @@ export const uploadLogo = (formData) => API.post('/user/upload/logo', formData);
 export const createFile = (formData, FileOptions) => API.post('/api/create/file', formData, FileOptions);
 export const createFolder = ({ name, parentId, userId, path }) => API.post('/api/create/folder', { name, parentId, userId, path });
 export const getFolders = (parentId) => API.get(`/api/folder/detail/${parentId}`);
+export const getFiles = (parentId) => API.get(`/api/file/detail/${parentId}`);
 export const getCurrentFolder = (currentFolderId) => API.get(`/api/currentFolder/detail/${currentFolderId}`);
