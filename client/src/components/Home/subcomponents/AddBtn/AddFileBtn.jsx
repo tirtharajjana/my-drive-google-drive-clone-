@@ -3,11 +3,14 @@ import { Button } from '@mui/material'
 import UploadFileRoundedIcon from '@mui/icons-material/UploadFileRounded';
 import { useDispatch, useSelector } from 'react-redux';
 import { ERROR, NOERROR, SUCCESS, NOSUCCESS } from '../../../../constants/actionTypes'
+import { createFile } from '../../../../actions/userAction';
 
 
 const AddFileBtn = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+    const { folderDetails, currentFolder } = useSelector(state => state.folderDetails);
 
+    // console.log(currentFolder);
     const dispatch = useDispatch();
     const SingleFileChange = (e) => {
         console.log(e.target.files);
@@ -24,10 +27,15 @@ const AddFileBtn = () => {
         }
         dispatch({ type: NOSUCCESS });
         dispatch({ type: SUCCESS, success: 'you are good to go' })
-        const formData = new FormData();
+        var formData = new FormData();
         formData.append('file', e.target.files[0]);
         formData.append('userId', user.result._id);
-
+        formData.append('parentId', currentFolder._id);
+        dispatch(createFile(formData))
+        // console.log(formData);
+        // for (var pair of formData.entries()) {
+        //     console.log(pair[0] + ', ' + pair[1]);
+        // }
     }
     return (
         <>

@@ -51,7 +51,7 @@ const signup = async (req, res) => {
 
         const token = jwt.sign({ email: result.email, id: result._id }, 'test', { expiresIn: '30d' });
 
-        return res.status(200).json({ result, token });
+        return res.status(201).json({ result, token });
 
     } catch (error) {
         // console.error(error);
@@ -81,7 +81,7 @@ const uploadLogo = async (req, res) => {
         await User.findByIdAndUpdate(id, { logoName, path, fileType });
         const result = await User.findById(id);
         // console.log(resu);
-        return res.status(200).json(result);
+        return res.status(201).json(result);
 
 
     } catch (error) {

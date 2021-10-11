@@ -1,4 +1,5 @@
 const Folder = require('../models/folder');
+const File = require('../models/file')
 
 
 const createFolder = async (req, res) => {
@@ -11,9 +12,26 @@ const createFolder = async (req, res) => {
         if (existingFolder) return res.status(400).json({ message: "Folder already exist with this name." });
         const folder = await Folder.create({ name, parentId, userId, path });
         // console.log(folder);
-        return res.status(200).json({ message: "Folder Created" });
+        return res.status(201).json({ message: "Folder Created" });
     } catch (error) {
         return res.status(500).json({ message: "Something went wrong." });
+    }
+}
+const createFile = async (req, res) => {
+    const { parentId, userId } = req.body;
+
+    try {
+        // console.log("file");
+        const name = req.file.originalname;
+        const path = req.file.path;
+        const fileType = req.file.mimetype;
+        const size = req.file.size;
+        var result = await File.create({ name, path, userId, parentId, fileType, size });
+        // console.log(result);
+        res.status(201).json({ message: "File uploaded" });
+    } catch (error) {
+        return res.status(404).json({ message: "Something went wrong." });
+
     }
 }
 
@@ -42,4 +60,4 @@ const getCurrentFolder = async (req, res) => {
     }
 }
 
-module.exports = { createFolder, getFolders, getCurrentFolder }
+module.exports = { createFolder, getFolders, getCurrentFolder, createFile }
