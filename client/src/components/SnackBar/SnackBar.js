@@ -13,14 +13,14 @@ function TransitionUp(props) {
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-const SnackBarJs = ({ error, type = 'success' }) => {
+const SnackBarJs = ({ message, type = "success" }) => {
     const [open, setOpen] = React.useState(true);
     // const { authData, error } = useSelector((state) => state.auth);
 
     // const handleClick = () => {
     //     setOpen(true);
     // }; 
-    if (error == null) {
+    if (message == null) {
         return "";
     }
     // console.log("err " + error);
@@ -36,11 +36,11 @@ const SnackBarJs = ({ error, type = 'success' }) => {
     return (
 
         // <Stack>
-            <Snackbar open={open} anchorOrigin={{ vertical: 'bottom', horizontal: 'right', }} TransitionComponent={TransitionUp} autoHideDuration={3000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity={type} sx={{ width: '100%' }}>
-                    {error}
-                </Alert>
-            </Snackbar>
+        <Snackbar open={open} anchorOrigin={{ vertical: 'bottom', horizontal: 'right', }} TransitionComponent={TransitionUp} autoHideDuration={3000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity={type} sx={{ width: '100%' }}>
+                {message}
+            </Alert>
+        </Snackbar>
 
         // {/* </Stack > */}
     )

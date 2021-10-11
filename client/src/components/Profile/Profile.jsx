@@ -43,7 +43,7 @@ const Profile = () => {
             return;
         }
         if (e.target.files[0].size > 1024 * 1024 * 100) {
-            alert("file size must be lesser than 100mb")
+            alert("file size must be less than 100mb")
             return;
         }
         const formData = new FormData();

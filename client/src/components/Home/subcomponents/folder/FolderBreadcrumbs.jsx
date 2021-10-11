@@ -21,9 +21,9 @@ const FolderBreadcrumbs = ({ currentFolder }) => {
             <Breadcrumbs aria-label="breadcrumb">
                 {
                     currentFolder?.path.map((folder, index) => (
-                        <div style={{ cursor: 'pointer' }} onClick={() => openFolder(folder.id)} >
+                        <div key={folder.id} style={{ cursor: 'pointer' }} onClick={() => openFolder(folder.id)} >
                             <Link
-                                key={folder.id}
+
                                 underline="hover"
                                 color="inherit"
                             >

@@ -13,7 +13,7 @@ import NavBarMenu from './NavBarMenu';
 const Navbar = () => {
     const classes = useStyles();
 
-    const { authData, error } = useSelector((state) => state.auth);
+    const { authData, error, success } = useSelector((state) => state.auth);
     const location = useLocation();
     // console.log(location.pathname);
     const dispatch = useDispatch();
@@ -49,7 +49,10 @@ const Navbar = () => {
 
     const Notification = () => {
         if (error) {
-            return <SnackBarJs error={error} type="error" />
+            return <SnackBarJs message={error} type="error" />
+        }
+        else if (success) {
+            return <SnackBarJs message={success} />
         }
         else {
             return null

@@ -9,8 +9,8 @@ const userSchema = mongoose.Schema({
     path: { type: String, require: false },
     fileType: { type: String, require: false },
     totalStorage: { type: Number, default: 2 * 1024 * 1024 * 1024 },
-    acquiredStorage:{type:Number,default:0},
-    rootFolder:{ type: String, require: false },
+    acquiredStorage: { type: Number, default: 0 },
+    rootFolder: { type: String, require: false },
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

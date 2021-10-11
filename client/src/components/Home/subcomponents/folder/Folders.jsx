@@ -15,15 +15,13 @@ const Folders = () => {
     return (
         <>
             <FolderBreadcrumbs currentFolder={currentFolder} />
-
             <Grid container alignItems='center' spacing={2} >
-                {folderDetails.length > 0 ?
-                    (folderDetails.map((folder) => (
+                {folderDetails &&
+                    folderDetails.map((folder) => (
                         <Grid key={folder._id} item xs={12} sm={6} md={3} lg={2} >
                             <Folder folder={folder} />
                         </Grid>
-                    ))) :
-                    <h1>No folder found</h1>
+                    ))
                 }
             </Grid>
         </>

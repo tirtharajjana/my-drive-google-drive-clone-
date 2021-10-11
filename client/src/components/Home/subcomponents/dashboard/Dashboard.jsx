@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserDetails } from '../../../../actions/userAction';
 import AddFolderBtn from '../AddBtn/AddFolderBtn';
+import AddFileBtn from '../AddBtn/AddFileBtn';
 
 
 const Dashboard = () => {
@@ -40,7 +41,7 @@ const Dashboard = () => {
                     </Box>
                 </Box>
                 <Toolbar className={classes.toolbar} >
-                    <AddFolderBtn />
+                    <AddFileBtn />
                     <AddFolderBtn />
                 </Toolbar>
             </AppBar>

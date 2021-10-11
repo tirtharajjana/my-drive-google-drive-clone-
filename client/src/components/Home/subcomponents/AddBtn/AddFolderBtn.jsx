@@ -61,7 +61,7 @@ const AddFolderBtn = () => {
     return (
         <>
             <Button color='success' style={{ margin: "10px" }} variant='outlined' onClick={handleClickOpen} >
-                <CreateNewFolderIcon />
+                <CreateNewFolderIcon /> Create folder
             </Button>
             <Dialog open={open} TransitionComponent={Transition} keepMounted onClose={handleClose} aria-describedby="alert-dialog-slide-description">
                 <form onSubmit={handleSubmit} >
