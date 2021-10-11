@@ -67,7 +67,7 @@ const AddFolderBtn = () => {
                 <form onSubmit={handleSubmit} >
                     <DialogTitle>Folder Name</DialogTitle>
                     <DialogContent>
-                        <TextField value={name} onChange={(e) => setName(e.target.value)} autoFocus margin="dense" id="folder" label="Add Folder" type="text" fullWidth variant="standard" required />
+                        <TextField value={name} inputProps={{ maxLength: 20 }} onChange={(e) => setName(e.target.value)} autoFocus margin="dense" id="folder" label="Add Folder" type="text" fullWidth variant="standard" required />
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>

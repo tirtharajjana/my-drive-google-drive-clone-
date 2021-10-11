@@ -26,7 +26,9 @@ const createFile = async (req, res) => {
         const path = req.file.path;
         const fileType = req.file.mimetype;
         const size = req.file.size;
+
         var result = await File.create({ name, path, userId, parentId, fileType, size });
+
         // console.log(result);
         res.status(201).json({ message: "File uploaded" });
     } catch (error) {

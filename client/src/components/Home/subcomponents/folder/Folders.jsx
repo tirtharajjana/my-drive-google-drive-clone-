@@ -18,7 +18,7 @@ const Folders = () => {
             <Grid container alignItems='center' spacing={2} >
                 {folderDetails &&
                     folderDetails.map((folder) => (
-                        <Grid key={folder._id} item xs={12} sm={6} md={3} lg={2} >
+                        <Grid key={folder._id} item xs={6} sm={6} md={2} lg={2} >
                             <Folder folder={folder} />
                         </Grid>
                     ))
