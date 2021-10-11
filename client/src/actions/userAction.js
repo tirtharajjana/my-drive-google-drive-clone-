@@ -55,7 +55,7 @@ export const createFolder = ({ name, parentId, userId, path }) => async (dispatc
         dispatch({ type: ERROR, error: error.response.data.message })
     }
 }
-export const createFile = (formData, parentId, FileOptions) => async (dispatch) => {
+export const createFile = (formData, parentId, userId, FileOptions) => async (dispatch) => {
     try {
         // console.log(formData);
         dispatch({ type: NOERROR });
@@ -68,6 +68,11 @@ export const createFile = (formData, parentId, FileOptions) => async (dispatch) 
         var { data } = await api.getFiles(parentId);
         // console.log(data.result);
         dispatch({ type: FILEDETAILS, data });
+        var { data } = await api.getUserDetails(userId);
+
+        // console.log(data);
+
+        dispatch({ type: USERDETAILS, data })
 
     } catch (error) {
         console.error(error.response.data.message);

@@ -36,7 +36,7 @@ const Dashboard = () => {
                         <LinearProgress variant="determinate" value={percentage} />
                     </Box>
                     <Box sx={{}}>
-                        <Typography variant="body2" color='secondary'>{`${avalibleStorage
+                        <Typography variant="body2" color='secondary'>{`${Math.floor(avalibleStorage)
                             } mb Avalible`}</Typography>
                     </Box>
                 </Box>

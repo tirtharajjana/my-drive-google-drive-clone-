@@ -30,8 +30,10 @@ const AddFileBtn = () => {
 
     const [progress, setProgress] = useState(0)
     const { folderDetails, currentFolder } = useSelector(state => state.folderDetails);
+    const { userDetails } = useSelector(state => state.userDetails);
 
-    // console.log(currentFolder);
+
+    // console.log(userDetails);
     const dispatch = useDispatch();
 
 
@@ -45,7 +47,7 @@ const AddFileBtn = () => {
     }
 
     useEffect(() => {
-        if (progress === Number(100)) {
+        if (progress >= Number(99)) {
             setOpen(false);
         }
     }, [progress])
@@ -56,14 +58,20 @@ const AddFileBtn = () => {
 
 
     const SingleFileChange = (e) => {
-        // console.log(e.target.files);
+        // console.log();
         setProgress(0);
-
         if (e.target.files.length !== 1) {
             dispatch({ type: NOERROR });
             dispatch({ type: ERROR, error: 'Please select one file' })
             return;
         }
+        var size = e.target.files[0].size;
+        if (userDetails.acquiredStorage + size > userDetails.totalStorage) {
+            dispatch({ type: NOERROR });
+            dispatch({ type: ERROR, error: 'You have not enough storage' })
+            return;
+        }
+
         if (e.target.files[0].size > 1024 * 1024 * 750) {
             dispatch({ type: NOERROR });
             dispatch({ type: ERROR, error: 'file size must be less than 750mb' })
@@ -75,7 +83,7 @@ const AddFileBtn = () => {
         formData.append('file', e.target.files[0]);
         formData.append('userId', user.result._id);
         formData.append('parentId', currentFolder._id);
-        dispatch(createFile(formData, parentId, FileOptions))
+        dispatch(createFile(formData, parentId, user?.result?._id, FileOptions))
         setOpen(true);
 
     }

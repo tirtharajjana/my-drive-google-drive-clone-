@@ -1,5 +1,6 @@
 const Folder = require('../models/folder');
 const File = require('../models/file')
+const User = require('../models/user');
 
 
 const createFolder = async (req, res) => {
@@ -26,8 +27,11 @@ const createFile = async (req, res) => {
         const path = req.file.path;
         const fileType = req.file.mimetype;
         const size = req.file.size;
-
-        var result = await File.create({ name, path, userId, parentId, fileType, size });
+        var result = await User.findById(userId);
+        var acquiredStorage = (result.acquiredStorage + size);
+        // console.log(result.acquiredStorage + size);
+        await User.findByIdAndUpdate(userId, { acquiredStorage })
+        result = await File.create({ name, path, userId, parentId, fileType, size });
 
         // console.log(result);
         res.status(201).json({ message: "File uploaded" });

@@ -36,7 +36,7 @@ const Home = () => {
     const { userDetails } = useSelector(state => state.userDetails);
     const { fileDetails } = useSelector(state => state.folderDetails);
 
-    console.log(fileDetails);
+    // console.log(fileDetails);
 
     return (
         <>
