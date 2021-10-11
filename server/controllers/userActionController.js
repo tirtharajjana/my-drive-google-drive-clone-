@@ -50,6 +50,19 @@ const getFolders = async (req, res) => {
         return res.status(500).json({ message: "Something went wrong." });
     }
 }
+const getFiles = async (req, res) => {
+    const { parentId } = req.params;
+
+    // console.log(parentId);
+    try {
+        const result = await File.find({ parentId }).collation({ locale: "en" }).sort({ name: 1 });
+        // console.log(result);
+        return res.status(200).json({ result });
+
+    } catch (error) {
+        return res.status(500).json({ message: "Something went wrong." });
+    }
+}
 const getCurrentFolder = async (req, res) => {
     const { currentFolderId } = req.params;
 
@@ -62,4 +75,4 @@ const getCurrentFolder = async (req, res) => {
     }
 }
 
-module.exports = { createFolder, getFolders, getCurrentFolder, createFile }
+module.exports = { createFolder, getFolders, getFiles, getCurrentFolder, createFile }

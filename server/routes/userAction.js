@@ -1,5 +1,5 @@
 const express = require('express');
-const { createFolder, getFolders, getCurrentFolder, createFile } = require('../controllers/userActionController');
+const { createFolder, getFolders, getCurrentFolder, createFile, getFiles } = require('../controllers/userActionController');
 const checkFolder = require('../middlewares/user');
 const router = express.Router();
 const { upload } = require('../helpers/filehelper');
@@ -7,6 +7,7 @@ const { upload } = require('../helpers/filehelper');
 router.post('/create/folder', createFolder);
 router.post('/create/file', upload.single('file'), createFile);
 router.get('/folder/detail/:parentId', checkFolder, getFolders);
+router.get('/file/detail/:parentId', getFiles);
 router.get('/currentFolder/detail/:currentFolderId', getCurrentFolder);
 
 
