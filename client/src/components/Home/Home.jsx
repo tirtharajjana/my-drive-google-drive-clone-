@@ -6,6 +6,7 @@ import { getUserDetails } from '../../actions/userAction';
 import Dashboard from './subcomponents/dashboard/Dashboard';
 import Folders from './subcomponents/folder/Folders';
 import { getFolders, getCurrentFolder, getFiles } from '../../actions/userAction';
+import Files from './subcomponents/file/Files';
 
 const Home = () => {
     const history = useHistory();
@@ -45,6 +46,7 @@ const Home = () => {
                     <>
                         <Dashboard />
                         <Folders />
+                        <Files />
                     </>
                 )
                 : <CircularProgress />}

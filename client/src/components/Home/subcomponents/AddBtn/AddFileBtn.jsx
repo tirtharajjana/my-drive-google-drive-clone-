@@ -84,6 +84,7 @@ const AddFileBtn = () => {
         formData.append('userId', user.result._id);
         formData.append('parentId', currentFolder._id);
         dispatch(createFile(formData, parentId, user?.result?._id, FileOptions))
+        setProgress(0);
         setOpen(true);
 
     }
