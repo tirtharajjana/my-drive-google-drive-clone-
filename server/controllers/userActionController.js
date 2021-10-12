@@ -33,7 +33,7 @@ const createFile = async (req, res) => {
         await User.findByIdAndUpdate(userId, { acquiredStorage })
         result = await File.create({ name, path, userId, parentId, fileType, size });
 
-        // console.log(result);
+        console.log(result._id);
         res.status(201).json({ message: "File uploaded" });
     } catch (error) {
         return res.status(404).json({ message: "Something went wrong." });

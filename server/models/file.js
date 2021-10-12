@@ -7,7 +7,7 @@ const fileSchema = mongoose.Schema({
     fileType: { type: String, require: true },
     path: { type: String, require: true },
     size: { type: String, require: true },
-
+    // downloadLink: { type: String, require: false }
 }, { timestamps: true });
 
 module.exports = mongoose.model('File', fileSchema);
