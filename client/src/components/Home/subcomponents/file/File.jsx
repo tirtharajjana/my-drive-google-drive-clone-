@@ -6,12 +6,15 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 
-
+import DownloadIcon from '@mui/icons-material/Download';
 
 const File = ({ file }) => {
     console.log(file);
+    const baseUrl = "http://localhost:5000/files";
     const size = (file.size / 1024 / 1024).toFixed(3)
-
+    const handleClick = () => {
+        window.open(`${baseUrl}/${file._id}`);
+    };
     return (
         <>
 
@@ -29,7 +32,9 @@ const File = ({ file }) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small">Learn More</Button>
+                    <Button variant="contained" onClick={handleClick} endIcon={<DownloadIcon />}>
+                        Download
+                    </Button>
                 </CardActions>
             </Card>
         </>
